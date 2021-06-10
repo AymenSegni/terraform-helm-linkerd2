@@ -29,7 +29,7 @@ resource "helm_release" "linkerd_ha" {
   }
 }
 
-// Disable HA Mode 
+// Disable HA Mode
 
 resource "helm_release" "linkerd_dev" {
   count      = var.enable_linkerd_ha == false ? 1 : 0
@@ -37,7 +37,7 @@ resource "helm_release" "linkerd_dev" {
   repository = "https://helm.linkerd.io/stable"
   chart      = "linkerd2"
   set_sensitive {
-    name  = "global.identityTrustAnchorsPEM"
+    name  = "identityTrustAnchorsPEM"
     value = tls_self_signed_cert.trustanchor_cert.cert_pem
   }
 
